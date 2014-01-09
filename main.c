@@ -9,6 +9,7 @@ SDL_Surface *images[2];
 
 void drawText(char *text, int x, int y);
 void drawPic(SDL_Surface *surface, int x, int y);
+void draw(void);
 void init(void);
 
 enum IMAGES
@@ -49,9 +50,27 @@ void init(void)
 	images[FOOD] = IMG_Load("food.png");
 }
 
+void draw(void)
+{
+	drawPic(images[GOLD], 16, 16);
+	drawText("100", 38, 16);
+
+	drawPic(images[TIME], 128, 16);
+	drawText("1", 150, 16);
+
+	drawPic(images[MAN], 256, 16);
+	drawText("5", 278, 16);
+
+	drawPic(images[FOOD], 384, 16);
+	drawText("20", 406, 16);
+
+	drawPic(images[HOUSE], 16, 42);
+	drawText("0", 38, 42);
+	SDL_Flip(screen);
+}
+
 int main(int argc, char *argv[])
 {
-	SDL_Surface  *image;
 	SDL_Event event;
 	int done = 0;
 
@@ -84,23 +103,9 @@ int main(int argc, char *argv[])
 
 	init();
 
-	drawPic(images[GOLD], 16, 16);
-	drawText("100", 38, 16);
 
-	drawPic(images[TIME], 128, 16);
-	drawText("1", 150, 16);
-
-	drawPic(images[MAN], 256, 16);
-	drawText("5", 278, 16);
-
-	drawPic(images[FOOD], 384, 16);
-	drawText("20", 406, 16);
-
-	drawPic(images[HOUSE], 16, 42);
-	drawText("0", 38, 42);
-	SDL_Flip(screen);
-
-
+	//TODO: This needs to sleep for 50ms per frame, then continue pooling
+	// Only draw if an event has ben catched.
 	while (!done)
 	{
 		while(SDL_PollEvent(&event))
@@ -115,6 +120,7 @@ int main(int argc, char *argv[])
 					break;
 			}
 		}
+		draw();
 	}
 
 	SDL_Quit();
