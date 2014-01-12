@@ -2,15 +2,11 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
+#include "main.h"
 
 TTF_Font *font;
 SDL_Surface *screen;
 SDL_Surface *images[2];
-
-void drawText(char *text, int x, int y);
-void drawPic(SDL_Surface *surface, int x, int y);
-void draw(void);
-void init(void);
 
 enum IMAGES
 {
